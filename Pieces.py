@@ -10,3 +10,6 @@ class Pawn(Piece):
 
 class Rook(Piece):
     horizontal_movement = 1
+
+class Knight(Piece):
+    pass
