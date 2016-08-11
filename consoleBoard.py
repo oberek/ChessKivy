@@ -16,21 +16,27 @@ class ChessBoard(object):
         for i in range(len(self.chess_board)):
             num = str(i + 1) + " |"
             print(num, end="")
-            for k in self.chess_board[i]:
-                print(self.chess_board[i][k], end=' ')
+            for char in range(ord('a'), ord('i')):
+                key = chr(char)+str(i+1)
+                print(self.chess_board[i][key], end=' ')
 
             print()
         return self.chess_board
 
     def placePiece(self, k, v):
         upper_or_lower = None
+        #if the piece is dark
         if v[1] == 'd':
             upper_or_lower = v[0].upper()
+
+        #otherwise is piece is light
         else:
             upper_or_lower = v[0].lower()
-        self.chess_board[int(k[1]) - 1][k] = upper_or_lower
+        # is this the problem
+        self.chess_board[int(k[1])-1][k] = upper_or_lower
 
     def move_piece(self, from_spot, to_spot):
+        print("\nMoving from " + from_spot + " to " + to_spot)
         value_in_from_spot = None
         row_it_was_in = -1
         for x in range(len(self.chess_board)):
@@ -45,4 +51,5 @@ class ChessBoard(object):
                     self.chess_board[x][to_spot] = value_in_from_spot
                     break
 
-        self.chess_board[row_it_was_in][value_in_from_spot] = "-"
+        self.chess_board[row_it_was_in][from_spot] = "-"
+        #print(str(row_it_was_in) + " " + from_spot)

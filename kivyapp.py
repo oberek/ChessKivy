@@ -9,22 +9,25 @@ class MyApp(App):
     def build(self):
         file = fileio.FileIO('input.log')
         file.readFile()
-        initial_file_placements = file.placed_pieces
-        piece_movements = file.move_to
+        initial_file_placement_keys = file.placed_pieces_keys
+        initial_file_placement_values = file.placed_pieces_values
 
         chess_board = consoleBoard.ChessBoard()
         chess_board.printChessBoard()
-        print(initial_file_placements)
+        #print(initial_file_placement_keys)
 
-        for k, v in initial_file_placements.items():
-            chess_board.placePiece(k, v)
+        for k in range(len(initial_file_placement_keys)):
+            print(initial_file_placement_keys[k] + " " + initial_file_placement_values[k])
+            chess_board.placePiece(initial_file_placement_keys[k], initial_file_placement_values[k])
             chess_board.printChessBoard()
             print()
 
-        for from_spot,to_spot in piece_movements.items():
+        for k in range(file.counter):
+            from_spot = file.move_from.get(k)
+            to_spot = file.move_to.get(k)
+
             chess_board.move_piece(from_spot, to_spot)
             chess_board.printChessBoard()
-            print()
 
         self.title = 'Chess'
         num_of_cols = 8
